@@ -12,21 +12,15 @@ export class MoedasComponent implements OnInit {
   moedas: Moeda[] = [];
 
   ngOnInit(): void {
-    	axios.get('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,BTC-BRL').then(response => {
-        const data = response.data;
+    getMoedas().then((moedas) => {
+      this.moedas = moedas;
+    });
 
-        Object.keys(data).forEach((moeda) => {
-          this.moedas.push({
-            nome: data[moeda].name.replace('/Real Brasileiro', ''),
-            compra: data[moeda].bid,
-            venda: data[moeda].ask,
-            variacao: data[moeda].pctChange,
-            menorvalor: data[moeda].low,
-            maiorvalor: data[moeda].high,
-            ultimaatualizacao: new Date(data[moeda].create_date),
-          });
-        });        
+    setInterval(() => {
+      getMoedas().then((moedas) => {
+        this.moedas = moedas;
       });
+    }, 1000 * 60);
   }
 
   formatter = new Intl.NumberFormat('pt-BR', {
@@ -34,4 +28,24 @@ export class MoedasComponent implements OnInit {
     currency: 'BRL',
   });
 
+}
+
+async function getMoedas(): Promise<Moeda[]> {
+  let moedas: Moeda[] = [];
+  const response = await axios.get('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,BTC-BRL');
+  const data = response.data;
+
+  Object.keys(data).forEach((moeda) => {
+    moedas.push({
+      nome: data[moeda].name.replace('/Real Brasileiro', ''),
+      compra: data[moeda].bid,
+      venda: data[moeda].ask,
+      variacao: data[moeda].pctChange,
+      menorvalor: data[moeda].low,
+      maiorvalor: data[moeda].high,
+      ultimaatualizacao: new Date(data[moeda].create_date),
+    });
+  });
+
+  return moedas;
 }
