@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   euro: Moeda;
   libra: Moeda;
   iene: Moeda;
+  bitcoin: Moeda;
 
   constructor() {
     this.dolar = {
@@ -47,10 +48,18 @@ export class AppComponent implements OnInit {
       maiorvalor: 0,
       ultimaatualizacao: new Date()
     };
+    this.bitcoin = {
+      compra: 0,
+      venda: 0,
+      variacao: 0,
+      menorvalor: 0,
+      maiorvalor: 0,
+      ultimaatualizacao: new Date()
+    };
   }
 
   ngOnInit(): void {
-    	axios.get('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL,JPY-BRL').then(response => {
+    	axios.get('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL,JPY-BRL,BTC-BRL').then(response => {
         this.dolar.compra = response.data.USDBRL.bid;
         this.dolar.venda = response.data.USDBRL.ask;
         this.dolar.variacao = response.data.USDBRL.pctChange;
@@ -78,6 +87,13 @@ export class AppComponent implements OnInit {
         this.iene.menorvalor = response.data.JPYBRL.low;
         this.iene.maiorvalor = response.data.JPYBRL.high;
         this.iene.ultimaatualizacao = new Date(response.data.JPYBRL.create_date);
+        
+        this.bitcoin.compra = response.data.BTCBRL.bid;
+        this.bitcoin.venda = response.data.BTCBRL.ask;
+        this.bitcoin.variacao = response.data.BTCBRL.pctChange;
+        this.bitcoin.menorvalor = response.data.BTCBRL.low;
+        this.bitcoin.maiorvalor = response.data.BTCBRL.high;
+        this.bitcoin.ultimaatualizacao = new Date(response.data.BTCBRL.create_date);
       });
   }
 

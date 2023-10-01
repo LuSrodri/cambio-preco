@@ -4,7 +4,7 @@
   <h1>Confira o Preço das Moedas em Real</h1>
 
   <section>
-    <ng-container>
+    <ng-container *ngIf="dolar">
       <div>
         <h2>Dolar</h2>
         <p>Compra: <strong>{{formatter.format(dolar.compra)}}</strong></p>
@@ -15,7 +15,7 @@
         <p>Última atualização: <strong>{{dolar.ultimaatualizacao.toLocaleTimeString()}}</strong></p>
       </div>
     </ng-container>
-    <ng-container>
+    <ng-container *ngIf="euro">
       <div>
         <h2>Euro</h2>
         <p>Compra: <strong>{{formatter.format(euro.compra)}}</strong></p>
@@ -25,7 +25,8 @@
         <p>Maior valor: <strong>{{formatter.format(euro.maiorvalor)}}</strong></p>
         <p>Última atualização: <strong>{{euro.ultimaatualizacao.toLocaleTimeString()}}</strong></p>
       </div>
-    </ng-container><ng-container>
+    </ng-container>
+    <ng-container *ngIf="libra">
       <div>
         <h2>Libra Esterlina</h2>
         <p>Compra: <strong>{{formatter.format(libra.compra)}}</strong></p>
@@ -35,7 +36,8 @@
         <p>Maior valor: <strong>{{formatter.format(libra.maiorvalor)}}</strong></p>
         <p>Última atualização: <strong>{{libra.ultimaatualizacao.toLocaleTimeString()}}</strong></p>
       </div>
-    </ng-container><ng-container>
+    </ng-container>
+    <ng-container *ngIf="iene">
       <div>
         <h2>Iene</h2>
         <p>Compra: <strong>{{formatter.format(iene.compra)}}</strong></p>
@@ -44,6 +46,17 @@
         <p>Menor valor: <strong>{{formatter.format(iene.menorvalor)}}</strong></p>
         <p>Maior valor: <strong>{{formatter.format(iene.maiorvalor)}}</strong></p>
         <p>Última atualização: <strong>{{iene.ultimaatualizacao.toLocaleTimeString()}}</strong></p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="bitcoin">
+      <div>
+        <h2>Bitcoin</h2>
+        <p>Compra: <strong>{{formatter.format(bitcoin.compra)}}</strong></p>
+        <p>Venda: <strong>{{formatter.format(bitcoin.venda)}}</strong></p>
+        <p>Variação no dia: <strong>{{bitcoin.variacao}}%</strong></p>
+        <p>Menor valor: <strong>{{formatter.format(bitcoin.menorvalor)}}</strong></p>
+        <p>Maior valor: <strong>{{formatter.format(bitcoin.maiorvalor)}}</strong></p>
+        <p>Última atualização: <strong>{{bitcoin.ultimaatualizacao.toLocaleTimeString()}}</strong></p>
       </div>
     </ng-container>
   </section>
