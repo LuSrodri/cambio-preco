@@ -22,3 +22,8 @@ section>div>p,
 section>div>h2 {
     margin: 0;
 }
+
+section>div>p:last-child {
+    margin-top: 15px;
+    text-align: end;
+}
