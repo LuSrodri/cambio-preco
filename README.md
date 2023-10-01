@@ -1,4 +1,6 @@
-# MyApp
+# Câmbio Preço
+
+Descubra o preço do Dolar e Euro em Reais.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.
 
