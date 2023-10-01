@@ -1,0 +1,24 @@
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+section>div {
+    border: solid 1px #ccc;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px;
+}
+
+section>div>h2 {
+    margin-bottom: 15px;
+}
+
+section>div>p,
+section>div>h2 {
+    margin: 0;
+}
